@@ -1,6 +1,7 @@
 import React from 'react';
 import { withStyles } from '@material-ui/styles';
 import { DESKTOP_WIDTH } from '../assets';
+import { Link } from 'react-router-dom';
 
 const styles = {
     navbar: {
@@ -16,11 +17,17 @@ const styles = {
         height: '100%'
     },
     logo: {
-        fontSize: '24px'
+        fontSize: '24px',
+        color: 'white',
+        '& span': {
+            color: 'yellow'
+        }
     },
     menu: {
         '& a': {
-            marginLeft: '15px'
+            marginLeft: '15px',
+            textDecoration: 'none',
+            color: 'white'
         }
     }
 }
@@ -31,14 +38,14 @@ const NavBar = props => {
         <div>
             <div className={classes.navbar}>
                 <div className={classes.container}>
-                    <div className={classes.logo}>PixelArtGallery</div>
+                    <div className={classes.logo}><span>PixelArt</span>Gallery</div>
                     <div className={classes.menu}>
-                        <a>Home</a>
-                        <a>Cathegories</a>
-                        <a>Artists</a>
-                        <a>Newest</a>
-                        <a>Sign In</a>
-                        <a>Sign Up</a>
+                        <Link to='/'>Home</Link>
+                        <Link to='/cathegories'>Cathegories</Link>
+                        <Link to='/artists'>Artists</Link>
+                        <Link to='/newest'>Newest</Link>
+                        <Link to='/signin'>Sign In</Link>
+                        <Link to='/signup'>Sign Up</Link>
                     </div>
                 </div>
                 

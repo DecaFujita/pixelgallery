@@ -1,38 +1,33 @@
-// import React from 'react';
-// import { withStyles } from '@material-ui/styles';
+import React from 'react';
+import PixelArt from './PixelArt';
+import { withStyles } from '@material-ui/styles';
 
-// const styles = {
-//     item: {
-//         marginBottom: '30px'
-//     },
-//     pixelart: {
-//         width: '300px',
-//         height: '300px',
-//         backgroundColor: 'red',
-//         marginBottom: '0'
-//     },
-//     caption: {
-//         display: 'flex',
-//         justifyContent: 'space-between',
-//         height: '10px',
-//         fontSize: '14px',
-//         transform: 'translateY(-10px)'
-//     }
+const styles = {
+    item: {
+        marginRight: '20px',
+        marginBottom: '30px',
+        '&:lastChild': {marginRight: '0'}
+    },
+    caption: {
+        display: 'flex',
+        justifyContent: 'space-between',
+        height: '10px',
+        fontSize: '14px',
+        transform: 'translateY(-10px)'
+    }
+}
 
-// }
+const GalleryItem = props => {
+    const { classes, item } = props;
+    return(
+        <div className={classes.item}>
+            <PixelArt art={item.pixelart}/>
+            <div className={classes.caption}>
+                <p>Author: {item.artist}</p>
+                <p>Likes: {item.likes}</p>
+            </div>
+        </div>
+    )
+};
 
-// const GalleryItem = props => {
-//     const { classes } = props
-//     return(
-//         <div className={classes.item}>
-//             <PixelArt />
-//             <div className={classes.caption}>
-//                 <p>Author</p>
-//                 <p>Likes: xx</p>
-//             </div>
-            
-//         </div>
-//     )
-// };
-
-// export default withStyles(styles)(GalleryItem);
+export default withStyles(styles)(GalleryItem);

@@ -1,4 +1,11 @@
-@material-ui/styles 
+DJANGO / PYTHON
 django
 djangorestframework
 django-cors-headers
+
+
+REACT / NPM
+@material-ui/styles 
+react-router-dom
+uuidv4
+axios

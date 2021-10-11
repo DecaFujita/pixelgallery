@@ -1,31 +1,35 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
 import GalleryItem from './GalleryItem.components';
 import { withStyles } from '@material-ui/styles';
-import { DESKTOP_WIDTH } from '../assets';
+import { GalleryContext } from '../contexts/GalleryContext';
 
 const styles = {
+    container: {
+        marginTop: '20px',
+        marginBottom: '20px'
+    },
     gallery: {
-        width: DESKTOP_WIDTH,
-        margin: '30px auto',
+        margin: '20px auto',
         display: 'flex',
-        flexWrap: 'wrap',
-        justifyContent: 'space-between'
+        flexWrap: 'wrap'
     }
 }
 
 const Gallery = props => {
-    const { classes } = props
+    const { artList } = useContext(GalleryContext);
+    const { classes } = props;
+
     return(
-        <div className={classes.gallery}>
-            <h1>Hello Gallery!</h1>
-            {/* <GalleryItem />
-            <GalleryItem />
-            <GalleryItem />
-            <GalleryItem />
-            <GalleryItem />
-            <GalleryItem />
-            <GalleryItem />
-            <GalleryItem /> */}
+        <div className={classes.container}>
+            <Link to='/add'>+ new</Link>
+            <div>
+                <div className={classes.gallery}>
+                {artList.map(art => 
+                    <GalleryItem key={art.id} item={art}/>
+                )}
+                </div>
+            </div>
         </div>
     )
 };

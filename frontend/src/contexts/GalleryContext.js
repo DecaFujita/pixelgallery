@@ -1,17 +1,21 @@
 import React, { createContext, useState } from "react";
-import { seedColors } from "../assets";
+import { INICIAL_VAL } from '../assets';
+const GalleryContext = createContext();
+import { uuid } from 'uuidv4';
+import useAPI from '../hooks/useAPI';
+import useLocalStorage from '../hooks/useLocalStorageState';
 
-const inicial_val = [{id: 1, name:'deca'}]
+const GalleryProvider = props => {
+    const [ artList, setArtList ] = useAPI(INICIAL_VAL);
 
-
-export const GalleryContext = createContext();
-
-export const GalleryProvider = props => {
-    const [ state, setstate ] = useState(inicial_val);
-
+    const saveNewArt = value => {
+        setArtList([...artList, { id: uuid(), name: 'deca', likes: 0, pixelart: value }]);
+    }
     return (
-        <GalleryContext.Provider value={{ state }}>
+        <GalleryContext.Provider value={{artList, saveNewArt}}>
             {props.children}
         </GalleryContext.Provider>
     )
 };
+
+export {GalleryContext, GalleryProvider};
