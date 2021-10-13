@@ -1,5 +1,4 @@
 import React, { useContext, useState } from 'react';
-import { GalleryContext } from '../contexts/GalleryContext';
 import Pixel from './Pixel';
 import { withStyles } from '@material-ui/styles';
 import { PIXEL_SQ, PIXEL_SIZE } from '../assets';
@@ -44,47 +43,72 @@ const styles = {
 }
 
 const AddNew = props => {
-    const { artList, saveNewArt } = useContext(GalleryContext);
     const pixelGrid = new Array(PIXEL_SQ * PIXEL_SQ).fill(true);
-    const [ art, setArt ] = useState(pixelGrid);
+
+    const [ formData, setFormData ] = useState({
+        title: '',
+        artist: 'Deca',
+        likes: 0,
+        pixelart: new Array(PIXEL_SQ * PIXEL_SQ).fill(true)
+    }); //save form data
+
     const { classes } = props;
 
     const toggle = (index, value) => {
-        let newArt = art.map(a => a);
+        let newArt = formData.pixelart.map(a => a);
         newArt.splice(index, 1, !value )
-        setArt(newArt);
+        setFormData({...formData, pixelart: newArt});
     }
 
-    const handleSave = (art) => {
-        saveNewArt(art);
-        props.history.push('/');
+    const handleTitleChange = e => {
+        console.log(e.target.value)
+        setFormData({...formData, title: e.target.value})
     }
 
-    console.log(artList)
+    const handleCathegoryChange = e => {
+        console.log(e.target.value)
+        setFormData({...formData, cathegory: e.target.value})
+    }
+
+
+    // const handleSave = (e, art) => {
+    //     e.presentDefault
+    //     saveNewArt(art);
+    //     // props.history.push('/');
+    // }
+
     return (
         <div>
             <h1>Create a new pixelart</h1>
             <div className={classes.column}>
                 <div className={classes.grid}>
-                    {art.map((pixel, index) => <Pixel key={`pix-${index}`} index={index} on={pixel} handleClick={toggle}/>)}
+                    {formData.pixelart.map((pixel, index) => <Pixel key={`pix-${index}`} index={index} on={pixel} handleClick={toggle}/>)}
                 </div>
                 <div>
-                    <form action='/action_page.php' className={classes.form}>
+                    <form className={classes.form}>
                         <div>
-                            <label for='art-title'>Title:</label>
-                            <input id='art-title' type='text' placeholder='Name your pixelart!' />
+                            <label>Title:</label>
+                            <input
+                                id='art-title'
+                                type='text'
+                                placeholder='Name your pixelart!'
+                                value={formData.title}
+                                onChange={handleTitleChange}
+                            />
                         </div>
-                        {/* <div>
-                            <label for='cathegories'>Cathegories:</label>
-                            <select id='cathegories' name='cathegories'>
+                        <div>
+                            <label>Cathegories:</label>
+                            <select id='cathegories' name='cathegories' onChange={handleCathegoryChange}>
                                 <option value='arcade'>Arcade</option>
                                 <option value='abstract'>Abstract</option>
                                 <option value='cute'>Cute</option>
                                 <option value='geometric'>Geometric</option>
                                 <option value='other'>Other</option>
                             </select>
-                        </div> */}
-                        <div onClick={() => handleSave(art)}>Save</div>
+                        </div>
+                        <button
+                        // onClick={() => handleSave(art)}
+                        >Save</button>
                         <button>Cancel</button>
                     </form>
                 </div>

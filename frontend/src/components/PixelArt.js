@@ -14,7 +14,7 @@ const styles = {
 
 const PixelArt = props => {
     const { classes, art } = props;
-    console.log('artTTTTTTYYYY', art)
+    
     return (
         <div className={classes.container}>
             {JSON.parse(art).map((pixel, index) => <PixelPreview key={`pix-${index}`} on={pixel}/>)}
