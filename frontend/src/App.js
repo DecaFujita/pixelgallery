@@ -23,6 +23,10 @@ const App = () => {
               path='/add'
               render={() => <AddNew />}
             />
+
+            {/* PROFILEPAGE */}
+            {/* LOGIN AREA */}
+
           </Switch>
         </div>
       </div>

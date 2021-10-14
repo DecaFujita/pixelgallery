@@ -3,6 +3,7 @@ import Pixel from './Pixel';
 import { withStyles } from '@material-ui/styles';
 import { PIXEL_SQ, PIXEL_SIZE } from '../assets';
 import { withRouter } from 'react-router';
+import { GalleryContext } from '../contexts/GalleryContext';
 
 const styles = {
     grid: {
@@ -43,11 +44,11 @@ const styles = {
 }
 
 const AddNew = props => {
-    const pixelGrid = new Array(PIXEL_SQ * PIXEL_SQ).fill(true);
-
+    // const pixelGrid = new Array(PIXEL_SQ * PIXEL_SQ).fill(true);
+    const { saveNewArt } = useContext(GalleryContext);
     const [ formData, setFormData ] = useState({
         title: '',
-        artist: 'Deca',
+        artist: 1,
         likes: 0,
         pixelart: new Array(PIXEL_SQ * PIXEL_SQ).fill(true)
     }); //save form data
@@ -71,11 +72,11 @@ const AddNew = props => {
     }
 
 
-    // const handleSave = (e, art) => {
-    //     e.presentDefault
-    //     saveNewArt(art);
-    //     // props.history.push('/');
-    // }
+    const handleSave = (e, formData) => {
+        e.preventDefault();
+        saveNewArt(formData);
+        props.history.push('/');
+    }
 
     return (
         <div>
@@ -107,7 +108,7 @@ const AddNew = props => {
                             </select>
                         </div>
                         <button
-                        // onClick={() => handleSave(art)}
+                        onClick={e => handleSave(e, formData)}
                         >Save</button>
                         <button>Cancel</button>
                     </form>
